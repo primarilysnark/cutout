@@ -1,5 +1,5 @@
 const requirejs = require('requirejs');
-require('should');
+const expect = require('expect');
 
 requirejs.config({
   baseUrl: './src'
@@ -18,21 +18,21 @@ describe('Tests without mocking', function () {
 
     describe('#contains', function () {
       it('should return true if match found', function () {
-        subject.contains('searching for 1234', /\d+/).should.equal(true);
+        expect(subject.contains('searching for 1234', /\d+/)).toBe(true);
       });
 
       it('should return false if no match found', function () {
-        subject.contains('searching for numbers', /\d+/).should.equal(false);
+        expect(subject.contains('searching for numbers', /\d+/)).toBe(false);
       });
     });
 
     describe('#query', function () {
       it('should return the matching text if found', function () {
-        subject.query('searching for 1234', /\d+/).should.equal(4);
+        expect(subject.query('searching for 1234', /\d+/)).toBe(4);
       });
 
       it('should return an empty string if no text found', function () {
-        subject.query('searching for numbers', /\d+/).should.equal(0);
+        expect(subject.query('searching for numbers', /\d+/)).toBe(0);
       });
     });
   });
@@ -49,11 +49,11 @@ describe('Tests without mocking', function () {
 
     describe('#search', function () {
       it('should return the matching text if found', function () {
-        subject.search('searching for 1234', /\d+/).should.equal('1234');
+        expect(subject.search('searching for 1234', /\d+/)).toBe('1234');
       });
 
       it('should return an empty string if no text found', function () {
-        subject.search('searching for numbers', /\d+/).should.equal('');
+        expect(subject.search('searching for numbers', /\d+/)).toBe('');
       });
     });
   });
