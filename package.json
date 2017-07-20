@@ -1,6 +1,6 @@
 {
   "name": "cut-out",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Library for mocking RequireJS dependencies",
   "main": "lib/index.js",
   "scripts": {
@@ -23,5 +23,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/primarilysnark/cutout.git"
-  }
+  },
+  "keywords": [
+    "mock",
+    "stub",
+    "spy",
+    "requirejs",
+    "cutout"
+  ]
 }
