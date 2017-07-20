@@ -1,7 +1,11 @@
 const td = require('testdouble');
 const expect = require('expect');
 
-const createSandbox = require('../lib/sandbox');
+const cutout = require('../lib');
+
+cutout.config({
+  baseUrl: './src'
+});
 
 describe('Tests with mocking', function () {
   describe('Example', function () {
@@ -10,16 +14,14 @@ describe('Tests with mocking', function () {
 
     before(function () {
       dependencyMock = td.object(['search']);
+
+      cutout.mock({
+        'dependency': dependencyMock
+      });
     });
 
     beforeEach(function (done) {
-      var context = createSandbox({
-        baseUrl: './src'
-      }, {
-        'dependency': dependencyMock
-      });
-
-      context(['example'], function (example) {
+      cutout(['example'], function (example) {
         subject = example;
         done();
       });
@@ -27,6 +29,10 @@ describe('Tests with mocking', function () {
 
     afterEach(function () {
       td.reset();
+    });
+
+    after(function () {
+      cutout.reset();
     });
 
     describe('#contains', function () {
@@ -58,12 +64,9 @@ describe('Tests with mocking', function () {
     var subject;
 
     beforeEach(function (done) {
-      var context = createSandbox({
-        baseUrl: './src'
-      });
-
-      context(['dependency'], function (dependency) {
+      cutout(['dependency'], function (dependency) {
         subject = dependency;
+
         done();
       });
     });
